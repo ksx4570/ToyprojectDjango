@@ -25,9 +25,7 @@ SECRET_KEY = "django-insecure-4--m@1hb#xrg!m5on6wf4l_1ncv*=*ifkna!&zvfe5#@3--4@4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    ".ap-northeast-2.compute.amazonaws.com"
-]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,9 +37,21 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    "post",
+    "rest_framework",
+    "corsheaders",
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
+}
+
 MIDDLEWARE = [
+     'corsheaders.middleware.CorsMiddleware',    
+    'django.middleware.common.CommonMiddleware', 
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -81,6 +91,10 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+CORS_ORIGIN_WHITELIST = [
+    'localhost:3000/'
+]
 
 
 # Password validation
